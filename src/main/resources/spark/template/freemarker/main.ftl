@@ -7,6 +7,6 @@
     <title>Asignacion de Aula</title>
 </head>
 <body>
-    <h2>asignacion de aulas</h2>
+    <h2 class="welcome">asignacion de aulas</h2>
 </body>
 </html>

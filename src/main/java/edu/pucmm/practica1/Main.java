@@ -5,8 +5,6 @@ import spark.ModelAndView;
 import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import javax.servlet.http.HttpServletResponse;
-
 import java.util.Map;
 
 import static spark.Spark.*;
