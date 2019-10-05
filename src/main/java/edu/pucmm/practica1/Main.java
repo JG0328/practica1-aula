@@ -2,6 +2,7 @@ package edu.pucmm.practica1;
 
 import edu.pucmm.practica1.encapsulacion.Usuario;
 import spark.ModelAndView;
+import spark.Session;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,27 @@ public class Main {
         });
 
         get("/login", (request, response) -> {
+            Usuario usuario = request.session(true).attribute("usuario");
+            ;
             return renderFreemarker(null, "formulario.ftl");
+        });
+
+        post("/auth", (request, response) -> {
+            Session session = request.session(true);
+            Usuario usuario = null;
+            if (request.params("usuario").equalsIgnoreCase("admin") && request.params("contrasena").equalsIgnoreCase("admin")) {
+                usuario = new Usuario("admin", "admin");
+            } else {
+                halt(401, "Credenciales no validas");
+            }
+
+            session.attribute("usuario", usuario);
+            response.redirect("/login");
+            return "";
+        });
+
+        get("/main", (request, response) -> {
+            return "Bienvenido!";
         });
     }
 }
