@@ -46,8 +46,8 @@ public class Main {
             return "";
         });
 
-        get("/main", (request, response) -> {
-            return "Bienvenido!";
+        get("/", (request, response) -> {
+            return renderFreemarker(null, "main.ftl");
         });
     }
 }
