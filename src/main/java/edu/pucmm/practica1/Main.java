@@ -16,6 +16,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        staticFiles.location("/publico");
+
         before("/", (request, response) -> {
             Usuario usuario = request.session(true).attribute("usuario");
             if (usuario == null) {
