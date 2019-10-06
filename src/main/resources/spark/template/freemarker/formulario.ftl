@@ -8,7 +8,7 @@
 <body>
 <h2 class="login">Digite sus credenciales</h2>
 <div class="card">
-    <form action="/auth" method="post">
+    <form action="/auth" method="POST">
         Correo electronico: <br/><input name="usuario" type="text"/><br/>
         Contrasena: <br/><input name="contrasena" type="password"/><br/>
         <button name="Enviar" type="submit">Iniciar Sesion</button>

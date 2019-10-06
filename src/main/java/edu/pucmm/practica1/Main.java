@@ -24,24 +24,30 @@ public class Main {
             }
         });
 
+        before("/login", (request, response) -> {
+            Usuario usuario = request.session(true).attribute("usuario");
+            if (usuario != null) {
+                response.redirect("/", 301);
+            }
+        });
+
         get("/login", (request, response) -> {
             Usuario usuario = request.session(true).attribute("usuario");
-            ;
             return renderFreemarker(null, "formulario.ftl");
         });
 
         post("/auth", (request, response) -> {
             Session session = request.session(true);
             Usuario usuario = null;
-            if (request.params("usuario").equalsIgnoreCase("admin") && request.params("contrasena").equalsIgnoreCase("admin")) {
-                usuario = new Usuario("admin", "admin");
-            } else {
-                halt(401, "Credenciales no validas");
-            }
 
-            session.attribute("usuario", usuario);
-            response.redirect("/login");
-            return "";
+            if (request.queryParams("usuario").equals("admin") && request.queryParams("contrasena").equals("admin")) {
+                usuario = new Usuario("admin", "admin");
+                session.attribute("usuario", usuario);
+                System.out.println("klk");
+                return renderFreemarker(null, "main.ftl");
+            }else{
+                return "<h1>Credenciales invalidas</h1>";
+            }
         });
 
         get("/", (request, response) -> {
